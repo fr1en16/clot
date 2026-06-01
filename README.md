@@ -5,8 +5,7 @@
 ## Установка
 
 1. Скачайте необходимый установщик для вашей архитектуры Mac:
-   - 🍏 **[Скачать Clot-1.0.0-arm64.pkg (для Apple Silicon M1/M2/M3)](https://github.com/fr1en16/clot/releases/download/v1.0.0/Clot-1.0.0-arm64.pkg)**
-   - 💻 **[Скачать Clot-1.0.0.pkg (для Intel Mac)](https://github.com/fr1en16/clot/releases/download/v1.0.0/Clot-1.0.0.pkg)**
+   - 🍏 **[Скачать Clot-1.0.0-arm64.pkg (для Apple Silicon M1/M2/M3)](https://drive.google.com/open?id=1FrZ1Cnc3HeJTgTxE7_WQlFGZD-BPg0Fc&usp=drive_fs)**
 2. Запустите установщик и следуйте простым инструкциям на экране.
 3. Откройте папку **«Программы»** на вашем Mac и запустите **Clot**.
 

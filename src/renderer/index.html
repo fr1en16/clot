@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clot Image Batch Compressor</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- macOS titlebar spacer for hidden titlebar styling -->
+  <div class="titlebar-drag-region">
+    <span class="app-title">CLOT // ЯШАЭДИШЕН</span>
+  </div>
+
+  <main class="app-container">
+    <!-- Top Control Bar: Compact Layout -->
+    <section class="control-panel card">
+      <div class="control-row">
+        <div class="input-group width-md">
+          <label>Режим</label>
+          <div class="toggle-group">
+            <button id="btn-mode-photo" class="toggle-btn active">Фото</button>
+            <button id="btn-mode-video" class="toggle-btn">Видео</button>
+          </div>
+        </div>
+
+        <div class="input-group flex-grow">
+          <label for="folder-path">Целевая папка</label>
+          <div class="row">
+            <input type="text" id="folder-path" placeholder="Выберите папку для оптимизации..." readonly />
+            <button id="btn-browse" class="btn btn-secondary">Обзор</button>
+          </div>
+        </div>
+
+        <div class="input-group width-format">
+          <label for="format-select">Формат</label>
+          <select id="format-select">
+            <option value="webp" selected>WebP</option>
+            <option value="jpeg">JPEG</option>
+            <option value="png">PNG</option>
+          </select>
+        </div>
+
+        <div class="input-group width-sm" id="quality-group">
+          <label for="quality-range">Качество WebP: <span id="quality-val">80</span>%</label>
+          <input type="range" id="quality-range" min="10" max="100" value="80" />
+        </div>
+
+        <div class="input-group width-sm" id="interpolation-group" style="display: none;">
+          <label for="interpolation-select">Интерполяция (FPS)</label>
+          <select id="interpolation-select">
+            <option value="off" selected>Выкл</option>
+            <option value="30">30 fps</option>
+            <option value="60">60 fps</option>
+            <option value="90">90 fps</option>
+            <option value="120">120 fps</option>
+          </select>
+        </div>
+
+        <div class="input-group" id="video-compress-group" style="display: none; width: 60px; flex-shrink: 0;">
+          <label for="video-compress-checkbox">Сжатие</label>
+          <div class="checkbox-container">
+            <input type="checkbox" id="video-compress-checkbox" />
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button id="btn-start" class="btn btn-primary" disabled>Старт</button>
+          <button id="btn-pause" class="btn btn-secondary hidden">Пауза</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Dashboard Grid -->
+    <section class="stats-panel">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Обработано</div>
+          <div class="stat-value" id="stat-processed">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ошибки</div>
+          <div class="stat-value text-red" id="stat-errors">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Исходный размер</div>
+          <div class="stat-value" id="stat-original">0.00 MB</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">После сжатия</div>
+          <div class="stat-value" id="stat-compressed">0.00 MB</div>
+        </div>
+        <div class="stat-card span-2 highlight">
+          <div class="stat-label">Сэкономлено места</div>
+          <div class="stat-value text-green" id="stat-saved">0.00 MB (0%)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Active Process Progress -->
+    <div id="progress-bar-container" class="progress-bar-container hidden">
+      <div class="progress-bar-wrapper">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <div class="progress-status-row">
+        <span id="progress-status-text">Ожидание запуска...</span>
+      </div>
+    </div>
+
+    <!-- Real-time Console Log (High Information Density) -->
+    <section class="console-panel flex-grow">
+      <div class="panel-header">
+        <h2>Журнал обработки (Лог)</h2>
+        <button id="btn-clear-log" class="btn-text">Очистить лог</button>
+      </div>
+      <div class="console-wrapper">
+        <div id="console-log" class="console-log">
+          <div class="log-line system-line">Система готова. Выберите папку для начала оптимизации.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Drag overlay for drop target -->
+  <div id="drag-overlay" class="drag-overlay">
+    <div class="overlay-content">
+      <div class="overlay-icon">📂</div>
+      <div class="overlay-text">Перетащите папку сюда для выбора</div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

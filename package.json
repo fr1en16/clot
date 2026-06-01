@@ -1,0 +1,62 @@
+{
+  "name": "clot",
+  "version": "1.0.0",
+  "description": "Batch Image Compressor to WebP for macOS using Sharp and Electron",
+  "main": "src/main/index.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "keywords": [
+    "electron",
+    "sharp",
+    "image-optimizer",
+    "webp",
+    "batch-processing",
+    "macos"
+  ],
+  "author": "Yapil",
+  "license": "MIT",
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "fluent-ffmpeg": "^2.1.3",
+    "sharp": "^0.33.2"
+  },
+  "devDependencies": {
+    "electron": "^28.2.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.yapil.clot",
+    "productName": "Clot",
+    "asar": true,
+    "afterPack": "src/main/afterPack.js",
+    "asarUnpack": [
+      "**/node_modules/sharp/**/*",
+      "**/node_modules/@img/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "node_modules/@ffmpeg-installer/darwin-arm64/ffmpeg",
+        "to": "bin/ffmpeg"
+      },
+      {
+        "from": "bin/rife",
+        "to": "bin/rife"
+      }
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "icon": "src/assets/icon.png",
+      "target": [
+        "dmg"
+      ]
+    }
+  }
+}

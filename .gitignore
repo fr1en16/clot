@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+.env
+
+# RIFE binary model files (large binary assets, download separately)
+bin/rife/*.bin
+bin/rife/**/*.bin
+bin/rife/rife-ncnn-vulkan

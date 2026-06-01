@@ -6,18 +6,16 @@ const { exec, execFile, spawn } = require('child_process');
 const ffmpeg = require('fluent-ffmpeg');
 const { walk } = require('./processor');
 
-// Configure path to FFmpeg binary based on environment
-const isPackaged = app.isPackaged;
-const ffmpegPath = isPackaged
-  ? path.join(process.resourcesPath, 'bin', 'ffmpeg')
-  : require('@ffmpeg-installer/ffmpeg').path;
+// Configure path to FFmpeg and RIFE binaries based on environment
+const isDev = !app.isPackaged;
+const binPath = isDev 
+  ? path.join(app.getAppPath(), 'resources', 'bin') 
+  : path.join(process.resourcesPath, 'bin');
 
+const ffmpegPath = path.join(binPath, 'ffmpeg');
 ffmpeg.setFfmpegPath(ffmpegPath);
 
-const rifeDir = isPackaged
-  ? path.join(process.resourcesPath, 'bin', 'rife')
-  : path.join(app.getAppPath(), 'bin', 'rife');
-
+const rifeDir = path.join(binPath, 'rife');
 const rifePath = path.join(rifeDir, 'rife-ncnn-vulkan');
 
 const VIDEO_EXTENSIONS = /\.(mp4|mov|mkv|avi|mxf|mts|m2ts|wmv)$/i;

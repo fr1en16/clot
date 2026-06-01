@@ -37,12 +37,8 @@
     ],
     "extraResources": [
       {
-        "from": "node_modules/@ffmpeg-installer/darwin-arm64/ffmpeg",
-        "to": "bin/ffmpeg"
-      },
-      {
-        "from": "bin/rife",
-        "to": "bin/rife"
+        "from": "resources/bin",
+        "to": "bin"
       }
     ],
     "directories": {
@@ -54,9 +50,20 @@
     ],
     "mac": {
       "icon": "src/assets/icon.png",
+      "hardenedRuntime": true,
       "target": [
-        "dmg"
+        {
+          "target": "pkg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
       ]
+    },
+    "pkg": {
+      "isRelocatable": false,
+      "allowAnywhere": false
     }
   }
 }
